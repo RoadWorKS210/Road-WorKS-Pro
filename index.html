@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,32 +6,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#10243a">
 <title>Road WorKS Pro</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#10243a;color:white;padding:18px}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#10243a;
+color:white;
+padding:18px
+}
+
 header{text-align:center;padding:20px 0}
+
 h1{margin:0;color:#ff861c;font-size:34px}
 .tagline{color:white;font-size:13px;margin-top:7px}
 h2{color:#ff861c;font-size:22px}
-.card{background:#193650;border:1px solid #34536b;border-radius:14px;padding:18px;margin:14px auto;max-width:520px}
+
+.card{
+background:#193650;
+border:1px solid #34536b;
+border-radius:14px;
+padding:18px;
+margin:14px auto;
+max-width:520px
+}
+
 .tabs{display:flex;gap:7px;flex-wrap:wrap}
-button{border:0;border-radius:9px;padding:12px;background:#ff861c;color:#14283b;font-weight:bold;font-size:14px;cursor:pointer}
+
+button{
+border:0;
+border-radius:9px;
+padding:12px;
+background:#ff861c;
+color:#14283b;
+font-weight:bold;
+font-size:14px;
+cursor:pointer
+}
+
 .tabs button{flex:1;min-width:85px}
 .tabs button.active{background:white}
-label{display:block;margin:15px 0 6px;font-size:14px}
-input{width:100%;padding:13px;border-radius:8px;border:1px solid #7890a4;font-size:18px;background:white;color:#172b40}
-.result{background:#10243a;border-radius:10px;padding:16px;margin-top:18px;border:1px solid #ff861c}
+
+label{
+display:block;
+margin:15px 0 6px;
+font-size:14px
+}
+
+input{
+width:100%;
+padding:13px;
+border-radius:8px;
+border:1px solid #7890a4;
+font-size:18px;
+background:white;
+color:#172b40
+}
+
+.result{
+background:#10243a;
+border-radius:10px;
+padding:16px;
+margin-top:18px;
+border:1px solid #ff861c
+}
+
 .result strong{color:#ff861c;font-size:24px}
 .result p{margin:8px 0}
-.note{font-size:12px;color:#c5d1dc;line-height:1.5}
-.actions{display:flex;gap:10px;margin-top:16px}
+
+.bigResult{
+color:#ff861c;
+font-size:36px;
+font-weight:bold;
+text-align:center;
+margin:12px 0
+}
+
+.resultLabel{
+text-align:center;
+font-size:15px;
+font-weight:bold
+}
+
+.note{
+font-size:12px;
+color:#c5d1dc;
+line-height:1.5
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:16px
+}
+
 .actions button{flex:1}
 .secondary{background:#dce5ec}
+
 [hidden]{display:none!important}
-footer{text-align:center;color:#aebdca;font-size:12px;padding:20px}
+
+footer{
+text-align:center;
+color:#aebdca;
+font-size:12px;
+padding:20px
+}
 </style>
 </head>
+
 <body>
+
 <header>
 <h1>Road WorKS Pro</h1>
 <div class="tagline">BUILT FOR YOUR ROADS.</div>
@@ -38,6 +125,7 @@ footer{text-align:center;color:#aebdca;font-size:12px;padding:20px}
 
 <div class="card">
 <h2>Material Calculators</h2>
+
 <div class="tabs">
 <button class="active" onclick="showCalc('asphalt',this)">Asphalt</button>
 <button onclick="showCalc('concrete',this)">Concrete</button>
@@ -46,6 +134,7 @@ footer{text-align:center;color:#aebdca;font-size:12px;padding:20px}
 </div>
 
 <div class="card">
+
 <h2 id="calcTitle">Asphalt Calculator</h2>
 
 <label>Length (feet)</label>
@@ -57,14 +146,15 @@ footer{text-align:center;color:#aebdca;font-size:12px;padding:20px}
 <label>Depth (inches)</label>
 <input id="depth" type="number" min="0" step="any" placeholder="Enter depth">
 
-<div id="densityField">
-<label>Asphalt density (lb per cubic foot)</label>
-<input id="density" type="number" min="1" value="145" step="any">
-<p class="note">145 lb/ft³ is an estimated starting density.</p>
+<div id="densityField" hidden>
+<label>Asphalt density</label>
+<input id="density" type="number" value="145">
 </div>
 
+<div id="wasteField">
 <label>Extra material / waste (%)</label>
 <input id="waste" type="number" min="0" value="10" step="any">
+</div>
 
 <div class="actions">
 <button onclick="calculate()">CALCULATE</button>
@@ -74,80 +164,136 @@ footer{text-align:center;color:#aebdca;font-size:12px;padding:20px}
 <div class="result" id="result" aria-live="polite">
 <p>Enter your measurements to get started.</p>
 </div>
+
 </div>
 
-<footer>Road WorKS Pro · Built for Your Roads.</footer>
+<footer>
+Road WorKS Pro · Built for Your Roads.
+</footer>
 
 <script>
+
 let current="asphalt";
 
 function showCalc(type,button){
+
 current=type;
-document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+
+document.querySelectorAll(".tabs button")
+.forEach(b=>b.classList.remove("active"));
+
 button.classList.add("active");
+
 const titles={
 asphalt:"Asphalt Calculator",
 concrete:"Concrete Calculator",
 slurry:"Concrete Slurry Calculator"
 };
+
 document.getElementById("calcTitle").textContent=titles[type];
-document.getElementById("densityField").hidden=(type!=="asphalt");
-document.getElementById("result").innerHTML="<p>Enter your measurements to get started.</p>";
+
+document.getElementById("densityField").hidden=true;
+
+document.getElementById("wasteField").hidden=(type==="asphalt");
+
+document.getElementById("result").innerHTML=
+"<p>Enter your measurements to get started.</p>";
+
 }
 
 function calculate(){
+
 const length=Number(document.getElementById("length").value);
 const width=Number(document.getElementById("width").value);
 const depth=Number(document.getElementById("depth").value);
+
 const waste=Number(document.getElementById("waste").value);
+
 const result=document.getElementById("result");
 
-if(!Number.isFinite(length)||!Number.isFinite(width)||
-!Number.isFinite(depth)||length<=0||width<=0||depth<=0||
-!Number.isFinite(waste)||waste<0){
-result.innerHTML="<p>Please enter valid measurements and waste percentage.</p>";
+if(
+!Number.isFinite(length)||
+!Number.isFinite(width)||
+!Number.isFinite(depth)||
+length<=0||
+width<=0||
+depth<=0
+){
+
+result.innerHTML="<p>Please enter all three measurements.</p>";
 return;
+
+}
+
+if(current!=="asphalt"&&
+(!Number.isFinite(waste)||waste<0)){
+
+result.innerHTML="<p>Please enter a valid extra material percentage.</p>";
+return;
+
 }
 
 const cubicFeet=length*(width/12)*(depth/12);
 const cubicYards=cubicFeet/27;
-const adjustedYards=cubicYards*(1+waste/100);
 
 if(current==="asphalt"){
-const density=Number(document.getElementById("density").value);
-if(!Number.isFinite(density)||density<=0){
-result.innerHTML="<p>Please enter a valid asphalt density.</p>";
-return;
-}
-const tons=cubicFeet*density/2000;
-const adjustedTons=tons*(1+waste/100);
+
+// Built-in asphalt density: 145 pounds per cubic foot
+// Automatically includes 10% extra material
+
+const density=145;
+const extra=1.10;
+
+const tons=(cubicFeet*density/2000)*extra;
+
 result.innerHTML=`
-<p>Volume: <strong>${cubicYards.toFixed(2)} yd³</strong></p>
-<p>Estimated asphalt: <strong>${adjustedTons.toFixed(2)} tons</strong></p>
-<p class="note">Includes ${waste}% extra material. Actual tonnage depends on mix density and compaction.</p>`;
+<div class="resultLabel">ESTIMATED TONS NEEDED</div>
+<div class="bigResult">${tons.toFixed(2)} TONS</div>
+<p class="note" style="text-align:center">
+Includes 10% extra material.
+</p>
+`;
+
 }else if(current==="concrete"){
+
+const adjustedYards=cubicYards*(1+waste/100);
+
 result.innerHTML=`
 <p>Volume: <strong>${cubicYards.toFixed(2)} yd³</strong></p>
 <p>With ${waste}% extra: <strong>${adjustedYards.toFixed(2)} yd³</strong></p>
-<p class="note">Estimated concrete order quantity.</p>`;
+<p class="note">Estimated concrete order quantity.</p>
+`;
+
 }else{
+
 const gallons=cubicFeet*7.48052;
 const adjustedGallons=gallons*(1+waste/100);
+const adjustedYards=cubicYards*(1+waste/100);
+
 result.innerHTML=`
 <p>Volume: <strong>${gallons.toFixed(1)} gallons</strong></p>
 <p>With ${waste}% extra: <strong>${adjustedGallons.toFixed(1)} gallons</strong></p>
 <p>Equivalent volume: <strong>${adjustedYards.toFixed(2)} yd³</strong></p>
-<p class="note">Wet volume estimate only, not a slurry mix recipe.</p>`;
+<p class="note">Wet volume estimate only, not a slurry mix recipe.</p>
+`;
+
 }
+
 }
 
 function clearFields(){
+
 document.getElementById("length").value="";
 document.getElementById("width").value="";
 document.getElementById("depth").value="";
 document.getElementById("waste").value="10";
-document.getElementById("result").innerHTML="<p>Enter your measurements to get started.</p>";
+
+document.getElementById("result").innerHTML=
+"<p>Enter your measurements to get started.</p>";
+
 }
+
 </script>
+
 </body>
 </html>
