@@ -146,7 +146,6 @@ padding:20px
 <label>Depth (inches)</label>
 <input id="depth" type="number" min="0" step="any" placeholder="Enter depth">
 
-<div id="densityField" hidden>
 <label>Asphalt density</label>
 <input id="density" type="number" value="145">
 </div>
@@ -192,7 +191,7 @@ slurry:"Concrete Slurry Calculator"
 
 document.getElementById("calcTitle").textContent=titles[type];
 
-document.getElementById("densityField").hidden=true;
+
 
 document.getElementById("wasteField").hidden=(type==="asphalt");
 
@@ -249,9 +248,6 @@ const tons=(cubicFeet*density/2000)*extra;
 result.innerHTML=`
 <div class="resultLabel">ESTIMATED TONS NEEDED</div>
 <div class="bigResult">${tons.toFixed(2)} TONS</div>
-<p class="note" style="text-align:center">
-Includes 10% extra material.
-</p>
 `;
 
 }else if(current==="concrete"){
