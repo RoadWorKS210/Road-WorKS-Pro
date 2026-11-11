@@ -146,10 +146,7 @@ padding:20px
 <label>Depth (inches)</label>
 <input id="depth" type="number" min="0" step="any" placeholder="Enter depth">
 
-<div id="wasteField" hidden>
-<label>Extra material / waste (%)</label>
-<input id="waste" type="number" min="0" value="10" step="any">
-</div>
+document.getElementById("wasteField").hidden=true;
 
 <div class="actions">
 <button onclick="calculate()">CALCULATE</button>
