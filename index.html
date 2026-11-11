@@ -146,11 +146,7 @@ padding:20px
 <label>Depth (inches)</label>
 <input id="depth" type="number" min="0" step="any" placeholder="Enter depth">
 
-<label>Asphalt density</label>
-<input id="density" type="number" value="145">
-</div>
-
-<div id="wasteField">
+<div id="wasteField" hidden>
 <label>Extra material / waste (%)</label>
 <input id="waste" type="number" min="0" value="10" step="any">
 </div>
@@ -191,9 +187,8 @@ slurry:"Concrete Slurry Calculator"
 
 document.getElementById("calcTitle").textContent=titles[type];
 
-
-
-document.getElementById("wasteField").hidden=(type==="asphalt");
+document.getElementById("wasteField").hidden=
+(type==="asphalt");
 
 document.getElementById("result").innerHTML=
 "<p>Enter your measurements to get started.</p>";
@@ -237,16 +232,17 @@ const cubicYards=cubicFeet/27;
 
 if(current==="asphalt"){
 
-// Built-in asphalt density: 145 pounds per cubic foot
-// Automatically includes 10% extra material
+// Fixed asphalt estimating density.
+// No user density input and no extra percentage.
 
-const density=145;
+const density=150;
 
-const tons:cubicFeet*density/2000;
+const tons=(cubicFeet*density)/2000;
 
 result.innerHTML=`
-<div class="resultLabel">ESTIMATED TONS NEEDED</div>
+<div class="resultLabel">TONS NEEDED</div>
 <div class="bigResult">${tons.toFixed(2)} TONS</div>
+<p class="note">Calculated quantity only. No extra material included.</p>
 `;
 
 }else if(current==="concrete"){
