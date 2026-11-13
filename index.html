@@ -8,279 +8,393 @@
 <title>Road WorKS Pro</title>
 
 <style>
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#10243a;
-color:white;
-padding:18px
+body {
+  margin: 0;
+  padding: 18px;
+  font-family: Arial, sans-serif;
+  background: #10243a;
+  color: white;
 }
 
-header{text-align:center;padding:20px 0}
-
-h1{margin:0;color:#ff861c;font-size:34px}
-.tagline{color:white;font-size:13px;margin-top:7px}
-h2{color:#ff861c;font-size:22px}
-
-.card{
-background:#193650;
-border:1px solid #34536b;
-border-radius:14px;
-padding:18px;
-margin:14px auto;
-max-width:520px
+.container {
+  max-width: 700px;
+  margin: auto;
 }
 
-.tabs{display:flex;gap:7px;flex-wrap:wrap}
-
-button{
-border:0;
-border-radius:9px;
-padding:12px;
-background:#ff861c;
-color:#14283b;
-font-weight:bold;
-font-size:14px;
-cursor:pointer
+.card {
+  background: #203750;
+  border: 2px solid #34536b;
+  border-radius: 24px;
+  padding: 25px;
+  margin-bottom: 25px;
 }
 
-.tabs button{flex:1;min-width:85px}
-.tabs button.active{background:white}
-
-label{
-display:block;
-margin:15px 0 6px;
-font-size:14px
+h1, h2 {
+  color: #ff861c;
 }
 
-input{
-width:100%;
-padding:13px;
-border-radius:8px;
-border:1px solid #7890a4;
-font-size:18px;
-background:white;
-color:#172b40
+h1 { font-size: 34px; }
+h2 { font-size: 29px; }
+
+.subtitle {
+  color: #dce5ed;
+  margin-top: -12px;
 }
 
-.result{
-background:#10243a;
-border-radius:10px;
-padding:16px;
-margin-top:18px;
-border:1px solid #ff861c
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
 }
 
-.result strong{color:#ff861c;font-size:24px}
-.result p{margin:8px 0}
-
-.bigResult{
-color:#ff861c;
-font-size:36px;
-font-weight:bold;
-text-align:center;
-margin:12px 0
+.tabs button {
+  flex: 1;
+  padding: 17px 5px;
+  border: 0;
+  border-radius: 17px;
+  background: #ff861c;
+  color: #10243a;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.resultLabel{
-text-align:center;
-font-size:15px;
-font-weight:bold
+.tabs button.active {
+  background: white;
 }
 
-.note{
-font-size:12px;
-color:#c5d1dc;
-line-height:1.5
+label {
+  display: block;
+  font-size: 17px;
+  margin-top: 22px;
 }
 
-.actions{
-display:flex;
-gap:10px;
-margin-top:16px
+input {
+  width: 100%;
+  padding: 20px;
+  margin-top: 9px;
+  border: 2px solid #9cabb9;
+  border-radius: 15px;
+  background: white;
+  color: #192c40;
+  font-size: 22px;
+  font-weight: bold;
 }
 
-.actions button{flex:1}
-.secondary{background:#dce5ec}
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
 
-[hidden]{display:none!important}
+.actions button {
+  flex: 1;
+  padding: 20px 8px;
+  border: 0;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: bold;
+  background: #ff861c;
+  color: #10243a;
+}
 
-footer{
-text-align:center;
-color:#aebdca;
-font-size:12px;
-padding:20px
+.actions .clear {
+  background: #dce5ed;
+}
+
+.result {
+  margin-top: 25px;
+  padding: 22px;
+  background: #14263b;
+  border: 2px solid #ff861c;
+  border-radius: 18px;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 100px;
+}
+
+.result strong {
+  color: #ff861c;
+}
+
+.big-result {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff861c;
+}
+
+.footer {
+  text-align: center;
+  color: #b5c1cf;
+  padding: 25px 5px;
+}
+
+.calculator { display: none; }
+.calculator.active { display: block; }
+
+@media(max-width:420px) {
+  .card { padding: 20px; }
+  h1 { font-size: 29px; }
+  h2 { font-size: 26px; }
+  .tabs button { font-size: 14px; }
 }
 </style>
 </head>
 
 <body>
-
-<header>
-<h1>Road WorKS Pro</h1>
-<div class="tagline">BUILT FOR YOUR ROADS.</div>
-</header>
+<div class="container">
 
 <div class="card">
+<h1>Road WorKS Pro</h1>
+<p class="subtitle">Built for Your Roads.</p>
+
 <h2>Material Calculators</h2>
 
 <div class="tabs">
-<button class="active" onclick="showCalc('asphalt',this)">Asphalt</button>
-<button onclick="showCalc('concrete',this)">Concrete</button>
-<button onclick="showCalc('slurry',this)">Slurry</button>
+<button class="active" onclick="showCalculator('asphalt',this)">Asphalt</button>
+<button onclick="showCalculator('concrete',this)">Concrete</button>
+<button onclick="showCalculator('slurry',this)">Slurry</button>
 </div>
 </div>
 
-<div class="card">
+<!-- ASPHALT -->
 
-<h2 id="calcTitle">Asphalt Calculator</h2>
+<div class="card calculator active" id="asphalt">
+<h2>Asphalt Calculator</h2>
 
 <label>Length (feet)</label>
-<input id="length" type="number" min="0" step="any" placeholder="Enter length">
+<input type="number" id="aLength" placeholder="Enter length">
 
 <label>Width (inches)</label>
-<input id="width" type="number" min="0" step="any" placeholder="Enter width">
+<input type="number" id="aWidth" placeholder="Enter width">
 
 <label>Depth (inches)</label>
-<input id="depth" type="number" min="0" step="any" placeholder="Enter depth">
-
-document.getElementById("wasteField").hidden=true;
+<input type="number" id="aDepth" placeholder="Enter finished compacted depth">
 
 <div class="actions">
-<button onclick="calculate()">CALCULATE</button>
-<button class="secondary" onclick="clearFields()">CLEAR</button>
+<button onclick="calculateAsphalt()">CALCULATE</button>
+<button class="clear" onclick="clearCalculator('asphalt')">CLEAR</button>
 </div>
 
-<div class="result" id="result" aria-live="polite">
-<p>Enter your measurements to get started.</p>
+<div class="result" id="aResult">
+Enter your measurements to get started.
+</div>
 </div>
 
+<!-- CONCRETE -->
+
+<div class="card calculator" id="concrete">
+<h2>Concrete Calculator</h2>
+
+<label>Length (feet)</label>
+<input type="number" id="cLength" placeholder="Enter length">
+
+<label>Width (inches)</label>
+<input type="number" id="cWidth" placeholder="Enter width">
+
+<label>Depth (inches)</label>
+<input type="number" id="cDepth" placeholder="Enter depth">
+
+<div class="actions">
+<button onclick="calculateConcrete()">CALCULATE</button>
+<button class="clear" onclick="clearCalculator('concrete')">CLEAR</button>
 </div>
 
-<footer>
+<div class="result" id="cResult">
+Enter your measurements to get started.
+</div>
+</div>
+
+<!-- SLURRY -->
+
+<div class="card calculator" id="slurry">
+<h2>Slurry Calculator</h2>
+
+<label>Ditch Length (feet)</label>
+<input type="number" id="sLength" placeholder="Enter ditch length">
+
+<label>Ditch Width (inches)</label>
+<input type="number" id="sWidth" placeholder="Enter ditch width">
+
+<label>Ditch Depth (inches)</label>
+<input type="number" id="sDepth" placeholder="Enter ditch depth">
+
+<label>Pipe Outside Diameter (inches)</label>
+<input type="number" id="sPipe" placeholder="Enter pipe outside diameter">
+
+<label>Pipe Length (feet)</label>
+<input type="number" id="sPipeLength" placeholder="Enter pipe length">
+
+<div class="actions">
+<button onclick="calculateSlurry()">CALCULATE</button>
+<button class="clear" onclick="clearCalculator('slurry')">CLEAR</button>
+</div>
+
+<div class="result" id="sResult">
+Enter your measurements to get started.
+</div>
+</div>
+
+<div class="footer">
 Road WorKS Pro · Built for Your Roads.
-</footer>
+</div>
+
+</div>
 
 <script>
 
-let current="asphalt";
+// SWITCH CALCULATORS
 
-function showCalc(type,button){
+function showCalculator(name,button) {
+  document.querySelectorAll('.calculator').forEach(el => {
+    el.classList.remove('active');
+  });
 
-current=type;
+  document.getElementById(name).classList.add('active');
 
-document.querySelectorAll(".tabs button")
-.forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll('.tabs button').forEach(el => {
+    el.classList.remove('active');
+  });
 
-button.classList.add("active");
-
-const titles={
-asphalt:"Asphalt Calculator",
-concrete:"Concrete Calculator",
-slurry:"Concrete Slurry Calculator"
-};
-
-document.getElementById("calcTitle").textContent=titles[type];
-
-document.getElementById("wasteField").hidden=true;
-
-document.getElementById("result").innerHTML=
-"<p>Enter your measurements to get started.</p>";
-
+  button.classList.add('active');
 }
 
-function calculate(){
+// CHECK INPUTS
 
-const length=Number(document.getElementById("length").value);
-const width=Number(document.getElementById("width").value);
-const depth=Number(document.getElementById("depth").value);
+function getValues(ids) {
+  const values = ids.map(id =>
+    Number(document.getElementById(id).value)
+  );
 
-const waste=Number(document.getElementById("waste").value);
+  if (values.some(v => !Number.isFinite(v) || v <= 0)) {
+    return null;
+  }
 
-const result=document.getElementById("result");
-
-if(
-!Number.isFinite(length)||
-!Number.isFinite(width)||
-!Number.isFinite(depth)||
-length<=0||
-width<=0||
-depth<=0
-){
-
-result.innerHTML="<p>Please enter all three measurements.</p>";
-return;
-
+  return values;
 }
 
-if(current!=="asphalt"&&
-(!Number.isFinite(waste)||waste<0)){
+// ASPHALT CALCULATOR
+// Uses 150 pounds per cubic foot.
+// Finished compacted depth.
+// No automatic waste or extra material.
 
-result.innerHTML="<p>Please enter a valid extra material percentage.</p>";
-return;
+function calculateAsphalt() {
+  const v = getValues(['aLength','aWidth','aDepth']);
+  const result = document.getElementById('aResult');
 
+  if (!v) {
+    result.innerHTML = 'Please enter all three measurements.';
+    return;
+  }
+
+  const [length,width,depth] = v;
+
+  const cubicFeet =
+    length * (width / 12) * (depth / 12);
+
+  const tons = (cubicFeet * 150) / 2000;
+
+  result.innerHTML = `
+    <strong>ASPHALT REQUIRED</strong><br>
+    <div class="big-result">${tons.toFixed(2)} Tons</div>
+    Cubic Feet: ${cubicFeet.toFixed(2)}<br>
+    Compacted Depth: ${depth} inches<br>
+    <br>
+    <strong>Exact calculated quantity.</strong>
+    No extra material included.
+  `;
 }
 
-const cubicFeet=length*(width/12)*(depth/12);
-const cubicYards=cubicFeet/27;
+// CONCRETE CALCULATOR
 
-if(current==="asphalt"){
+function calculateConcrete() {
+  const v = getValues(['cLength','cWidth','cDepth']);
+  const result = document.getElementById('cResult');
 
-// Fixed asphalt estimating density.
-// No user density input and no extra percentage.
+  if (!v) {
+    result.innerHTML = 'Please enter all three measurements.';
+    return;
+  }
 
-const density=150;
+  const [length,width,depth] = v;
 
-const tons=(cubicFeet*density)/2000;
+  const cubicFeet =
+    length * (width / 12) * (depth / 12);
 
-result.innerHTML=`
-<div class="resultLabel">TONS NEEDED</div>
-<div class="bigResult">${tons.toFixed(2)} TONS</div>
-<p class="note">Calculated quantity only. No extra material included.</p>
-`;
+  const cubicYards = cubicFeet / 27;
 
-}else if(current==="concrete"){
+  const bags80 = cubicFeet / 0.60;
+  const bags60 = cubicFeet / 0.45;
 
-const adjustedYards=cubicYards*(1+waste/100);
-
-result.innerHTML=`
-<p>Volume: <strong>${cubicYards.toFixed(2)} yd³</strong></p>
-<p>With ${waste}% extra: <strong>${adjustedYards.toFixed(2)} yd³</strong></p>
-<p class="note">Estimated concrete order quantity.</p>
-`;
-
-}else{
-
-const gallons=cubicFeet*7.48052;
-const adjustedGallons=gallons*(1+waste/100);
-const adjustedYards=cubicYards*(1+waste/100);
-
-result.innerHTML=`
-<p>Volume: <strong>${gallons.toFixed(1)} gallons</strong></p>
-<p>With ${waste}% extra: <strong>${adjustedGallons.toFixed(1)} gallons</strong></p>
-<p>Equivalent volume: <strong>${adjustedYards.toFixed(2)} yd³</strong></p>
-<p class="note">Wet volume estimate only, not a slurry mix recipe.</p>
-`;
-
+  result.innerHTML = `
+    <strong>CONCRETE REQUIRED</strong><br>
+    <div class="big-result">${cubicYards.toFixed(2)} Cubic Yards</div>
+    Cubic Feet: ${cubicFeet.toFixed(2)}<br>
+    Approx. 80 lb bags: ${Math.ceil(bags80)}<br>
+    Approx. 60 lb bags: ${Math.ceil(bags60)}
+  `;
 }
 
+// SLURRY CALCULATOR
+// Subtracts pipe displacement using outside diameter.
+
+function calculateSlurry() {
+  const v = getValues([
+    'sLength','sWidth','sDepth','sPipe','sPipeLength'
+  ]);
+
+  const result = document.getElementById('sResult');
+
+  if (!v) {
+    result.innerHTML = 'Please enter all five measurements.';
+    return;
+  }
+
+  const [length,width,depth,diameter,pipeLength] = v;
+
+  const ditchVolume =
+    length * (width / 12) * (depth / 12);
+
+  const pipeRadius = diameter / 24;
+
+  const pipeVolume =
+    Math.PI * pipeRadius * pipeRadius * pipeLength;
+
+  const fillVolume = ditchVolume - pipeVolume;
+
+  if (fillVolume <= 0) {
+    result.innerHTML =
+      'Pipe volume is equal to or greater than ditch volume. Please check your measurements.';
+    return;
+  }
+
+  const gallons = fillVolume * 7.48052;
+  const cubicYards = fillVolume / 27;
+
+  result.innerHTML = `
+    <strong>SLURRY REQUIRED</strong><br>
+    <div class="big-result">${gallons.toFixed(2)} Gallons</div>
+    Cubic Feet: ${fillVolume.toFixed(2)}<br>
+    Cubic Yards: ${cubicYards.toFixed(2)}<br>
+    Pipe displacement subtracted.
+  `;
 }
 
-function clearFields(){
+// CLEAR INPUTS
 
-document.getElementById("length").value="";
-document.getElementById("width").value="";
-document.getElementById("depth").value="";
-document.getElementById("waste").value="10";
+function clearCalculator(name) {
+  const section = document.getElementById(name);
 
-document.getElementById("result").innerHTML=
-"<p>Enter your measurements to get started.</p>";
+  section.querySelectorAll('input').forEach(input => {
+    input.value = '';
+  });
 
+  const result = section.querySelector('.result');
+
+  result.innerHTML = 'Enter your measurements to get started.';
 }
 
 </script>
-
 </body>
 </html>
